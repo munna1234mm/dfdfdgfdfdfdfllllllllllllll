@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- HilltopAds Verification Code - Positioned at top for easier detection -->
+    <!-- HilltopAds Verification Code - Positioned at top for verification -->
     <meta name="890d62df10c213f65bd613ee1c9c220332a3d1d9" content="890d62df10c213f65bd613ee1c9c220332a3d1d9" />
     <title>Gmail Father - Light Green Edition</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -62,7 +62,7 @@
     <div id="loading-screen" class="fixed inset-0 z-[100] bg-white flex items-center justify-center">
         <div class="flex flex-col items-center gap-4">
             <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-            <p class="text-primary text-xs font-bold uppercase tracking-widest">Gmail Father</p>
+            <p class="text-primary text-xs font-bold uppercase tracking-widest animate-pulse">Gmail Father</p>
         </div>
     </div>
 
@@ -215,7 +215,6 @@
 
                 <!-- পোডিয়াম -->
                 <div class="px-6 pb-10 flex items-end justify-center gap-3">
-                    <!-- ২য় -->
                     <div class="flex flex-col items-center flex-1">
                         <div class="relative mb-2">
                             <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-slate-300 text-white text-[10px] font-black px-2 py-0.5 rounded-full">#2</span>
@@ -226,7 +225,6 @@
                         <p class="text-[10px] font-bold truncate w-20 text-center text-slate-700">শফিক_০৭</p>
                         <p class="text-[10px] text-primary font-black">৮৪,২০০</p>
                     </div>
-                    <!-- ১ম -->
                     <div class="flex flex-col items-center flex-1 scale-125 -mt-6">
                         <div class="relative mb-2">
                             <i data-lucide="crown" class="absolute -top-6 left-1/2 -translate-x-1/2 text-primary w-8 h-8 fill-current"></i>
@@ -237,7 +235,6 @@
                         <p class="text-[10px] font-black text-primary uppercase">রাইহান খান</p>
                         <p class="text-[10px] text-slate-800 font-black">১,২৫,০০০</p>
                     </div>
-                    <!-- ৩য় -->
                     <div class="flex flex-col items-center flex-1">
                         <div class="relative mb-2">
                             <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full">#3</span>
@@ -250,7 +247,6 @@
                     </div>
                 </div>
 
-                <!-- ইউজার লিস্ট -->
                 <div id="leaderboard-list" class="px-6 space-y-3 pb-44">
                     <!-- ১০০ জন ডেমো ইউজার লোড হবে -->
                 </div>
@@ -276,14 +272,14 @@
                 <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 relative overflow-hidden mb-10 text-center">
                     <div class="relative z-10 grid grid-cols-2 divide-x divide-slate-200">
                         <div class="pr-4 text-center">
-                            <p class="text-[9px] uppercase font-black text-slate-400 tracking-widest mb-2">ক্রেডিট</p>
+                            <p class="text-[9px] uppercase font-black text-slate-400 tracking-widest mb-2 text-center">ক্রেডিট</p>
                             <div class="flex items-center justify-center gap-2">
                                 <i data-lucide="database" class="text-primary w-4 h-4 fill-current"></i>
                                 <p id="stats-credits" class="text-xl font-black text-slate-800">0</p>
                             </div>
                         </div>
                         <div class="pl-4 text-center">
-                            <p class="text-[9px] uppercase font-black text-slate-400 tracking-widest mb-2">অ্যাড ওয়াচ</p>
+                            <p class="text-[9px] uppercase font-black text-slate-400 tracking-widest mb-2 text-center">অ্যাড ওয়াচ</p>
                             <div class="flex items-center justify-center gap-2">
                                 <i data-lucide="play-circle" class="text-slate-800 w-4 h-4"></i>
                                 <p id="stats-ads" class="text-xl font-black text-slate-800">0</p>
@@ -331,7 +327,7 @@
                 </div>
                 <div class="text-right">
                     <p id="banner-credits" class="text-primary font-black text-xl tracking-tighter">0</p>
-                    <p class="text-[9px] text-slate-400 uppercase font-black">ক্রেডিট</p>
+                    <p class="text-[9px] text-slate-400 uppercase font-black text-center">ক্রেডিট</p>
                 </div>
             </div>
         </div>
@@ -363,6 +359,7 @@
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAmtDEw41p1POsK-8qWQM_f3PzBFjFBHxc",
             authDomain: "gen-lang-client-0199662561.firebaseapp.com",
@@ -377,7 +374,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const fbAppId = "gmail-father-v2";
+        const fbAppId = typeof __app_id !== 'undefined' ? __app_id : "gmail-father-v2";
 
         let isSignupMode = false;
 
@@ -451,6 +448,7 @@
         };
 
         const syncUserData = (user) => {
+            // RULE 1: Standardized path with 6 segments
             const userDocRef = doc(db, 'artifacts', fbAppId, 'users', user.uid, 'profile', 'info');
             onSnapshot(userDocRef, (snap) => {
                 if (snap.exists()) {
@@ -466,7 +464,12 @@
                     document.getElementById('banner-name').textContent = (data.fullName || 'User');
                     document.getElementById('banner-credits').textContent = credits.toLocaleString();
                 }
-            }, (err) => console.error("Sync error:", err));
+            }, (err) => {
+                console.error("Sync error:", err);
+                if (err.code === 'permission-denied') {
+                    document.getElementById('error-message').textContent = "সার্ভার অ্যাক্সেস রিফিউজ করা হয়েছে। কনসোল থেকে পারমিশন চেক করুন।";
+                }
+            });
         };
 
         window.handleAuth = async (e) => {
@@ -480,6 +483,7 @@
 
             errorBox.classList.add('hidden');
             submitBtn.disabled = true;
+            const originalContent = submitBtn.innerHTML;
             submitBtn.innerHTML = `<div class="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin mx-auto"></div>`;
 
             try {
@@ -499,9 +503,15 @@
                     await signInWithEmailAndPassword(auth, email, password);
                 }
             } catch (err) {
+                console.error("Auth error:", err);
                 errorBox.classList.remove('hidden');
-                document.getElementById('error-message').textContent = "ইমেইল বা পাসওয়ার্ড ভুল হয়েছে। আবার চেষ্টা করুন।";
-                submitBtn.innerHTML = `<span>${isSignupMode ? 'সাইন আপ' : 'প্রবেশ করুন'}</span>`;
+                
+                if (err.code === 'auth/operation-not-allowed') {
+                    document.getElementById('error-message').textContent = "ইমেইল সাইন-ইন মেথডটি ব্লক করা আছে। গুগল ক্লাউড কনসোল থেকে API Restrictions চেক করুন।";
+                } else {
+                    document.getElementById('error-message').textContent = "ভুল ইমেইল বা পাসওয়ার্ড। অনুগ্রহ করে আবার চেষ্টা করুন।";
+                }
+                submitBtn.innerHTML = originalContent;
             } finally {
                 submitBtn.disabled = false;
                 lucide.createIcons();
@@ -544,24 +554,34 @@
             }, 2000);
         };
 
-        document.getElementById('auth-form').onsubmit = window.handleAuth;
-
-        onAuthStateChanged(auth, async (user) => {
-            document.getElementById('loading-screen').classList.add('hidden');
-            if (user && !user.isAnonymous) {
-                document.getElementById('auth-shell').classList.add('hidden');
-                document.getElementById('app-shell').classList.remove('hidden');
-                syncUserData(user);
-                window.showView('browser');
-            } else {
-                document.getElementById('auth-shell').classList.remove('hidden');
-                document.getElementById('app-shell').classList.add('hidden');
-                if(!user) {
-                    try { await signInAnonymously(auth); } catch(e) {}
+        // Initialize App - RULE 3: Auth Before Queries
+        async function init() {
+            onAuthStateChanged(auth, async (user) => {
+                document.getElementById('loading-screen').classList.add('hidden');
+                if (user && !user.isAnonymous) {
+                    document.getElementById('auth-shell').classList.add('hidden');
+                    document.getElementById('app-shell').classList.remove('hidden');
+                    syncUserData(user);
+                    window.showView('browser');
+                } else {
+                    document.getElementById('auth-shell').classList.remove('hidden');
+                    document.getElementById('app-shell').classList.add('hidden');
+                    
+                    if (!user) {
+                        try {
+                            // Non-blocking anonymous sign-in
+                            await signInAnonymously(auth);
+                        } catch (e) {
+                            console.warn("Anonymous sign-in restricted. Proceeding to normal auth.");
+                        }
+                    }
                 }
-            }
-            lucide.createIcons();
-        });
+                lucide.createIcons();
+            });
+        }
+
+        document.getElementById('auth-form').onsubmit = window.handleAuth;
+        init();
     </script>
 </body>
 </html>
